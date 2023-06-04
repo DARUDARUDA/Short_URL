@@ -11,9 +11,9 @@ import java.util.Map;
 @Repository
 public class UrlRepositoryImpl implements UrlRepository {
 
-    private static Map<Long, Integer> indexMap = new HashMap<>();
+    private static final Map<Long, Integer> indexMap = new HashMap<>();
 
-    private static ArrayList<Url> urlList = new ArrayList<>();
+    private static final ArrayList<Url> urlList = new ArrayList<>();
 
     private static int sequence = 0;
 
@@ -37,10 +37,9 @@ public class UrlRepositoryImpl implements UrlRepository {
         if(indexMap.containsKey(keyNum)){
             return false;
         }
-        url.setUrlNum(sequence+1);
         indexMap.put(keyNum, sequence);
         urlList.add(url);
-        sequence++;
+        urlList.get(sequence++).setUrlNum(sequence);
         return true;
     }
 
