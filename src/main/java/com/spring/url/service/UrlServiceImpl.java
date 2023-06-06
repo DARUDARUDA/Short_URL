@@ -23,8 +23,8 @@ public class UrlServiceImpl implements UrlService {
         return urlRepository.findAll();
     }
 
-    private static char [] words = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    private static char [] words = {'2', '3', '4', '5', '6', '7', '8', '9' ,'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
     @Override
     public void encoding(String longUrl) {
@@ -38,8 +38,8 @@ public class UrlServiceImpl implements UrlService {
             StringBuilder sb = new StringBuilder();
             long encode = keyNum;
             for(int i = 0; i < 6; i++){
-                sb.append(words[(int) (encode%52)]);
-                encode /= 52;
+                sb.append(words[(int) (encode%56)]);
+                encode /= 56;
             }
 
             Url url = Url.builder().key(String.valueOf(sb)).longUrl(longUrl).build();
@@ -65,7 +65,7 @@ public class UrlServiceImpl implements UrlService {
         for (int i = 0; i < 6; i++){
             char ch = key.charAt(i);
             boolean check = false;
-            for (int j = 0; j < 52; j++){
+            for (int j = 0; j < 56; j++){
                 if(ch == words[j]){
                     check = true;
                     keyNum += j * pow;
@@ -74,7 +74,7 @@ public class UrlServiceImpl implements UrlService {
             if(!check){
                 return "/";
             }
-            pow *=52;
+            pow *=56;
         }
 
 
